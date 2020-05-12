@@ -18,5 +18,6 @@ case "$1" in
   	fi
   	docker build -t kontenerrr:1.0 .
   	docker run -it kontenerrr:1.0
+	docker exec -ti kontenerrr:1.0 bash
    ;;
 esac
