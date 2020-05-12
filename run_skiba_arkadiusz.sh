@@ -16,7 +16,7 @@ case "$1" in
   	then
         cd projekt
   	fi
-  	docker build -t konteneras:1.0 .
-  	docker run -it konteneras:1.0
+  	docker build -t konteneraas:1.0 .
+  	docker run -it konteneraas:1.0
    ;;
 esac
