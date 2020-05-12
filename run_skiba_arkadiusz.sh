@@ -12,11 +12,11 @@ case "$1" in
 	 git clone https://github.com/Arekss/updatedScript.git
    ;;
   "run")
- 	if [[ -d "projekt" ]]
+ 	if [[ -d "solution" ]]
   	then
-        cd projekt
+        cd solution
   	fi
-  	docker build -t konteneraas:1.0 .
-  	docker run -it konteneraas:1.0
+  	docker build -t kontenerrr:1.0 .
+  	docker run -it kontenerrr:1.0
    ;;
 esac
