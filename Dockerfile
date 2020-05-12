@@ -8,6 +8,6 @@ COPY README.txt /home/root/
 COPY IgnoreMe.sh /home/root/
 COPY zadania /home/root/exercises/
 
-RUN /home/root/IgnoreMe.sh
+RUN /bin/bash -c "source /home/root/IgnoreMe.sh"
 
 WORKDIR home/root
