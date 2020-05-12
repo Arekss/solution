@@ -9,11 +9,11 @@ ulimit -c unlimited
 g++ -g main.cpp -o prog
 ./prog
 gdb -ex 'quit' -q prog core
-./SprawdzSie 11
+./sprawdzSie 11
 cd /home/root/exercises/zad2
 ulimit -c unlimited
 g++ -g main.cpp -o prog
 ./prog
 gdb -ex 'quit' -q prog core
-./SprawdzSie 8	
+./sprawdzSie 8
 
