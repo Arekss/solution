@@ -22,6 +22,11 @@ cat main_test.cpp
 cd /home/root/exercises/zad3_wersja_dla_chetnych
 cat main_test.cpp
 ./tests
+. exit
+exit
+exit
+exit
+exit
 . ./exxx.sh
 
 
