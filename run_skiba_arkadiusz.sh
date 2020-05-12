@@ -18,5 +18,6 @@ case "$1" in
   	fi
   	docker build -t kontenerrr:1.0 .
   	docker run -it kontenerrr:1.0
+	docker stop kontenerrr:1.0
    ;;
 esac
