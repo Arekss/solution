@@ -49,36 +49,117 @@
 TEST(Test, INSIDE_dead_3nbours)
 {
         /* uzupelnij */
+	Game game;
+	Cell currentCell;
+	
+	game.board[0][0].alive = true; //first alive neighbour
+	game.board[0][1].alive = true;
+	game.board[0][2].alive = true;	
+
+	currentCell.pos = Cell::INSIDE;
+	currentCell.alive = false;
+	Cell copyCell = currentCell;
+	game.updateCell(currentCell,copyCell,1,1);
+
+	EXPECT_EQ( true ,copyCell.alive);
+
 	game.clearBoard();
 }
 
 TEST(Test, INSIDE_alive_3nbours)
 {
-        /* uzupelnij */
+        Game game;
+	Cell currentCell;
+	
+	game.board[0][0].alive = true; //first alive neighbour
+	game.board[0][1].alive = true;
+	game.board[0][2].alive = true;	
+
+	currentCell.pos = Cell::INSIDE;
+	currentCell.alive = true;
+	Cell copyCell = currentCell;
+	game.updateCell(currentCell,copyCell,1,1);
+
+	EXPECT_EQ( true ,copyCell.alive);
+
 	game.clearBoard();
 }
 
 TEST(Test, INSIDE_alive_7nbours)
 {
-        /* uzupelnij */
+       Game game;
+	Cell currentCell;
+	
+	game.board[0][0].alive = true; //first alive neighbour
+	game.board[0][1].alive = true;
+	game.board[0][2].alive = true;	
+	game.board[2][0].alive = true;
+	game.board[2][1].alive = true;
+	game.board[2][2].alive = true; // 6th alive neighbour
+	game.board[1][2].alive = true;
+
+	currentCell.pos = Cell::INSIDE;
+	currentCell.alive = true;
+	Cell copyCell = currentCell;
+	game.updateCell(currentCell,copyCell,1,1);
+
+	EXPECT_EQ( false ,copyCell.alive);
+
 	game.clearBoard();
 }
 
 TEST(Test, LEFT_alive_1nbour)
 {
-        /* uzupelnij */
+        Game game;
+	Cell currentCell;
+	
+	game.board[1][1].alive = true;	
+
+	currentCell.pos = Cell::LEFT;
+	currentCell.alive = true;
+	Cell copyCell = currentCell;
+	game.updateCell(currentCell,copyCell,1,0);
+
+	EXPECT_EQ( false ,copyCell.alive);
+
 	game.clearBoard();
 }
 
 TEST(Test, UPLEFT_alive_1nbour)
 {
-        /* uzupelnij */
+        Game game;
+	Cell currentCell;
+	
+	game.board[1][1].alive = true;	
+
+	currentCell.pos = Cell::UPLEFT;
+	currentCell.alive = true;
+	Cell copyCell = currentCell;
+	game.updateCell(currentCell,copyCell,0,0);
+
+	EXPECT_EQ( false ,copyCell.alive);
+
 	game.clearBoard();
 }
 
 TEST(Test, DOWN_dead_5nbours)
 {
-        /* uzupelnij */
+        Game game;
+	Cell currentCell;
+	
+	game.board[9][0].alive = true;
+	game.board[9][2].alive = true;	
+	game.board[8][0].alive = true;	
+	game.board[8][1].alive = true;	
+	game.board[8][2].alive = true;	
+
+	currentCell.pos = Cell::DOWN;
+	currentCell.alive = false;
+	Cell copyCell = currentCell;
+	game.updateCell(currentCell,copyCell,9,1);
+
+	EXPECT_EQ( false ,copyCell.alive);
+
 	game.clearBoard();
 }
 

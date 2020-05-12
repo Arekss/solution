@@ -21,13 +21,13 @@ TEST(Test, first)
 	Game game;
 	Cell currentCell;
 
-	currentCell.pos = Cell:: /*uzupelnij*/      ;    // podpowiedz: Enum
-	currentCell.alive =  /* uzupelnij */      ;      // podpowiedz: bool
+	currentCell.pos = Cell::INSIDE      ;    // podpowiedz: Enum
+	currentCell.alive =  false      ;      // podpowiedz: bool
 	Cell copyCell = currentCell;
 
 	game.updateCell(currentCell,copyCell,0,0);
 
-	EXPECT_EQ( /* uzupelnij */ ,copyCell.alive); // podpowiedz: bool
+	EXPECT_EQ( false ,copyCell.alive); // podpowiedz: bool
 }
 
 TEST(Test, second)
@@ -35,13 +35,13 @@ TEST(Test, second)
 	Game game;
 	Cell currentCell;
 
-	currentCell.pos = Cell:: /*uzupelnij*/      ;    // podpowiedz: Enum
-	currentCell.alive =  /* uzupelnij */      ;      // podpowiedz: bool
+	currentCell.pos = Cell::RIGHT      ;    // podpowiedz: Enum
+	currentCell.alive =  false      ;      // podpowiedz: bool
 	Cell copyCell = currentCell;
 
 	game.updateCell(currentCell,copyCell,0,0);
 
-	EXPECT_EQ( /* uzupelnij */ ,copyCell.alive); // podpowiedz: bool
+	EXPECT_EQ( false ,copyCell.alive); // podpowiedz: bool
 }
 
 TEST(Test, third)
@@ -49,13 +49,13 @@ TEST(Test, third)
 	Game game;
 	Cell currentCell;
 
-	currentCell.pos = Cell:: /*uzupelnij*/      ;    // podpowiedz: Enum
-	currentCell.alive =  /* uzupelnij */      ;      // podpowiedz: bool
+	currentCell.pos = Cell::DOWN      ;    // podpowiedz: Enum
+	currentCell.alive =  true      ;      // podpowiedz: bool
 	Cell copyCell = currentCell;
 
 	game.updateCell(currentCell,copyCell,0,0);
 
-	EXPECT_EQ( /* uzupelnij */ ,copyCell.alive); // podpowiedz: bool
+	EXPECT_EQ( false ,copyCell.alive); // podpowiedz: bool
 }
 
 int main(int argc, char**argv)
