@@ -4,13 +4,13 @@ cd build
 cmake ..
 make
 cp lib/libgtest* /usr/lib
-cd home/root/exercises/zad1
+cd /home/root/exercises/zad1
 ulimit -c unlimited
 g++ -g main.cpp -o prog
 ./prog
 gdb -ex 'quit' -q prog core
 ./SprawdzSie 11
-cd home/root/exercises/zad2
+cd /home/root/exercises/zad2
 ulimit -c unlimited
 g++ -g main.cpp -o prog
 ./prog
