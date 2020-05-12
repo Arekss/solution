@@ -1,0 +1,12 @@
+		           @@ SPRAWDZ PRZYCZYNE BLEDU PROGRAMU ZA POMOCA PLIKU CORE @@ 
+
+Uzywajac debuggera oraz pliku ze zrzutem pamieci mozna szybko znalezc przyczyne bledu oraz linie w ktorej on wystapil
+
+1) ustaw mozliwosc generowania pliku core poleceniem 'ulimit -c unlimited'
+2) skompiluj plik main.cpp z flaga -g 'g++ -g main.cpp -o <program>'
+3) uruchom program - spowoduje to automatyczne wygenerowanie pliku core
+4) zbadaj przyczyne bledu poleceniem 'gdb -q <program> <plik_core>'
+5) odczytaj linie w ktorej wystapil blad - bedzie ona wynikiem zadania
+6) uruchom program 'SprawdzSie' z argumentem ktory jest odczytana liczba.
+	example:  './SprawdzSie 50'     Odpowie on czy zadanie zostalo poprawnie zrobione.
+

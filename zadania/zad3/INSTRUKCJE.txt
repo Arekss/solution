@@ -1,0 +1,33 @@
+#################    Cwiczenie 3 - generowanie raportu z pokryciem kodu testami   ######################
+
+Opis:
+
+Celem cwiczenia jest zobaczenie mozliwosci narzecia lcov - generuje ono raport przez ktore linie kodu
+naszego projektu przechodza testy. Mozna tym samym sprawdzic jak dobrze nasz projekt jest otestowany oraz
+gdzie takich testow brakuje. Wlaczona flaga 'lcov_branch_coverage=1' umozliwia jeszcze dokladniejsza analize,
+widzimy ktore kombinacje instrukcji warunkowych zostaly przetestowane, a ktore nie.
+
+Wynikiem zadania jest plik html. Aby go uruchomic bedziemy musieli skopiowac go do hosta, gdyz docker nie umozliwi nam otworzenia go w zrenderowanej formie.
+
+0) Dopisujemy testy do pliku main_test.cpp
+
+1) Kompilujemy projekt z wlaczonymi flagami coverage'u oraz linkowaniem biblioteki testujacej:
+   g++ -o tests -fprofile-arcs -ftest-coverage main_test.cpp Game.h Cell.h Game.cpp -lgtest -lpthread
+
+2) Uruchamiamy testy 
+   ./tests
+
+3) generujemy raport: (jesli kogos interesuje znaczenie konkretnych opcji w ponizszej komendzie zapraszam na teamsy)
+   lcov --rc lcov_branch_coverage=1 --capture --directory . --output-file main_coverage.info --no-external
+
+4) konwertujemy raport do formatu html
+   genhtml --rc genhtml_branch_coverage=1 main_coverage.info --output-directory report
+
+5) Otwieramy nowy terminal u siebie lokalnie. Kopiujemy folder 'zad3' do hosta.
+ 
+ a) wykonujemy polecenie sudo docker ps
+ b) kopiujemy CONTAINER ID kontenera 'kontenerAS'
+ c) wykonujemy polecenie sudo docker cp $skopiowaneID:/home/root/exercises/zad3 ~/sciezka/gdzie/chcemy
+ d) odpalamy raport np firefoxem: firefox report/index.html
+ e) przegladamy raport, glownie plik Game.cpp gdyz tam dopisywalismy testy
+ f) usuwamy folder zad3 (niestety skrypt tego nie zrobi, chyba ze skopiowaliscie do folderu pobranego z gita) 

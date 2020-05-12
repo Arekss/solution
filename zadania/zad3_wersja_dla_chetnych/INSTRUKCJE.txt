@@ -1,0 +1,113 @@
+#################    Cwiczenie 3 - generowanie raportu z pokryciem kodu testami   ######################
+
+Opis:
+
+Celem cwiczenia jest zobaczenie mozliwosci narzecia lcov - generuje ono raport przez ktore linie kodu
+naszego projektu przechodza testy. Mozna tym samym sprawdzic jak dobrze nasz projekt jest otestowany oraz
+gdzie takich testow brakuje. Wlaczona flaga 'lcov_branch_coverage=1' umozliwia jeszcze dokladniejsza analize,
+widzimy ktore kombinacje instrukcji warunkowych zostaly przetestowane, a ktore nie.
+
+Wynikiem zadania jest plik html. Aby go uruchomic bedziemy musieli skopiowac go do hosta, gdyz docker nie umozliwi nam otworzenia go w zrenderowanej formie.
+
+reguly gry: https://pl.wikipedia.org/wiki/Gra_w_zycie
+
+
+
+-1) dokumentacja: documentation/index.html
+
+ W celu przejrzenia dokumentacji otwieramy nowy terminal u siebie lokalnie. Kopiujemy folder 'documentation' do hosta.
+ 
+ a) wykonujemy polecenie sudo docker ps
+ b) kopiujemy CONTAINER ID kontenera 'kontenerAS'
+ c) wykonujemy polecenie sudo docker cp $skopiowaneID:/home/root/exercises/zad3_wersja_dla_chetnych/documentation ~/sciezka/gdzie/chcemy
+ d) odpalamy raport np firefoxem: firefox documentation/index.html
+ e0) Interesuje nas plik Game.cpp. Wiec otwieramy index.html -> Classes -> Game -> Game.cpp
+ e1) Interesuje nas przetestowanie funkcji Game::updateBoard. Jest to kluczowa funkcja produkujaca nastepna plansze na podstawie poprzedniej.
+ e2) wszystkich sensownych scenariuszy do przetetsowania w powyzszej funkcji jest ponad 40. My chcemy napisac x testow
+
+#####################################################################################################################################################
+ - Domyslnie plansza jest pusta
+ - Domyslnie komorka jest martwa, w trybie INSIDE oraz posiada 0 zywych sasiadow
+
+#########################
+  @@@ TEST 1 @@@@
+- Komorka w pozycji: INSIDE 
+- Komorka martwa
+- liczba zywych sasiadow: 3
+
+OCZEKIWANY OUTPUT: komorka zywa 
+#########################
+
+#########################
+  @@@ TEST 2 @@@@
+- Komorka w pozycji: INSIDE
+- Komorka zywa
+- liczba zywych sasiadow: 3 
+
+OCZEKIWANY OUTPUT: komorka zywa
+#########################
+
+#########################
+  @@@ TEST 3 @@@@
+- Komorka w pozycji: INSIDE
+- Komorka zywa
+- liczba zywych sasiadow: 7
+
+OCZEKIWANY OUTPUT: komorka martwa
+#########################
+
+#########################
+  @@@ TEST 4 @@@@
+- Komorka w pozycji: LEFT
+- Komorka zywa
+- liczba zywych sasiadow: 1
+
+OCZEKIWANY OUTPUT: komorka martwa
+#########################
+
+#########################
+  @@@ TEST 5 @@@@
+- Komorka w pozycji: UPLEFT
+- Komorka zywa
+- liczba zywych sasiadow: 1
+
+OCZEKIWANY OUTPUT: komorka martwa
+#########################
+
+#########################
+  @@@ TEST 6 @@@@
+- Komorka w pozycji: DOWN
+- Komorka martwa
+- liczba zywych sasiadow: 5
+
+OCZEKIWANY OUTPUT: komorka martwa
+#########################
+
+
+ UWAGA: Kod nie jest napisany idealnie pod test driven development, ale czesc istotnych informacji wyciagniemy z raportu
+  
+
+f) usuwamy folder documentation (po skonczeniu zadania) 
+
+0) Dopisujemy testy do pliku main_test.cpp.
+
+1) Kompilujemy projekt z wlaczonymi flagami coverage'u oraz linkowaniem biblioteki testujacej:
+   g++ -o tests -fprofile-arcs -ftest-coverage main_test.cpp Game.h Cell.h Game.cpp -lgtest -lpthread
+
+2) Uruchamiamy testy 
+   ./tests
+
+3) generujemy raport: (jesli kogos interesuje znaczenie konkretnych opcji w ponizszej komendzie zapraszam na teamsy)
+   lcov --rc lcov_branch_coverage=1 --capture --directory . --output-file main_coverage.info --no-external
+
+4) konwertujemy raport do formatu html
+   genhtml --rc genhtml_branch_coverage=1 main_coverage.info --output-directory report
+
+5) Otwieramy nowy terminal u siebie lokalnie. Kopiujemy folder 'zad3' do hosta.
+ 
+ a) wykonujemy polecenie sudo docker ps
+ b) kopiujemy CONTAINER ID kontenera 'kontenerAS'
+ c) wykonujemy polecenie sudo docker cp $skopiowaneID:/home/root/exercises/zad3 ~/sciezka/gdzie/chcemy
+ d) odpalamy raport np firefoxem: firefox report/index.html
+ e) przegladamy raport, glownie plik Game.cpp gdyz tam dopisywalismy testy
+ f) usuwamy folder zad3 (niestety skrypt tego nie zrobi, chyba ze skopiowaliscie do folderu pobranego z gita) 
